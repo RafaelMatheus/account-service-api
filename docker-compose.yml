@@ -1,4 +1,5 @@
 version: '2.1'
+
 services:
   rabbitmq:
     image: rabbitmq:3.13-management
@@ -13,6 +14,11 @@ services:
       - RABBITMQ_DEFAULT_VHOST=b2b
     networks:
       - wallet
+    healthcheck:
+      test: ["CMD", "rabbitmqctl", "status"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
   mongodb:
     image: mongo
@@ -27,6 +33,11 @@ services:
     command: mongod
     networks:
       - wallet
+    healthcheck:
+      test: [ "CMD-SHELL", "mongo --eval 'db.stats()'" ]
+      interval: 30s
+      timeout: 30s
+      retries: 3
 
   account-management:
     image: account-management
@@ -35,7 +46,7 @@ services:
       - 8080:8080
     environment:
       - SPRING_RABBITMQ_HOST=rabbitmq
-      - SPRING_DATA_MONGODB_URI=mongodb://localhost:27017
+      - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017
     depends_on:
       - mongodb
       - rabbitmq
@@ -49,7 +60,7 @@ services:
       - 8081:8081
     environment:
       - SPRING_RABBITMQ_HOST=rabbitmq
-      - SPRING_DATA_MONGODB_URI=mongodb://localhost:27017
+      - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017
     depends_on:
       - mongodb
       - rabbitmq
@@ -64,7 +75,7 @@ services:
       - 8082:8082
     environment:
       - SPRING_RABBITMQ_HOST=rabbitmq
-      - SPRING_DATA_MONGODB_URI=mongodb://localhost:27017
+      - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017
     depends_on:
       - mongodb
       - rabbitmq
@@ -74,7 +85,6 @@ services:
       - wallet
 
   nginx:
-    platform: linux/x86_64
     image: nginx:latest
     ports:
       - 80:80
