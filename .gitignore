@@ -1,0 +1,33 @@
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# IntelliJ IDEA files
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Maven build directory
+target/
+
+# Gradle build directory
+build/
+
+# Compiled Java bytecode
+bin/
+
+# Package files
+*.jar
+*.war
+*.ear
+
+# Project specific (Eclipse)
+.classpath
+.project
+.settings/
+
+# Ignore spring-boot-devtools restart log file
+restart.log
