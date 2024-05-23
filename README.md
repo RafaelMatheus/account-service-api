@@ -9,8 +9,8 @@ O Account Management Service é um componente central que oferece funcionalidade
 ## Arquitetura
 
 O serviço Account Management é projetado como um microserviço independente e segue os princípios de arquitetura de microsserviços. Ele é desenvolvido usando tecnologias como Spring Boot, Java rabbitMq e Banco de Dados mongoDb para armazenar os dados das contas.
+![246911156-dfbb865b-3530-446b-b407-ecb7844490d1](https://github.com/RafaelMatheus/account-service-api/assets/25590639/73dfdcb7-fa8f-4b74-bcde-9d97e3dd3875)
 
-![246911156-dfbb865b-3530-446b-b407-ecb7844490d1.png](..%2F..%2FDownloads%2F246911156-dfbb865b-3530-446b-b407-ecb7844490d1.png)
 ## Integrações
 
 O Account Management Service se integra com os seguintes serviços:
