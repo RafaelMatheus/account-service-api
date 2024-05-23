@@ -86,6 +86,7 @@
         - wallet
 
     nginx:
+      platform: linux/arm64/v8
       image: nginx:latest
       ports:
         - 80:80

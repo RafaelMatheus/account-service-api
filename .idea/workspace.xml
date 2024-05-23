@@ -4,12 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da42f8a1-81aa-4255-9b15-6ecad2bbbd04" name="Changes" comment="finaliznado implementaao do projeto">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/account-service-api.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+    <list default="true" id="da42f8a1-81aa-4255-9b15-6ecad2bbbd04" name="Changes" comment="adicionando novas implementacoes">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wallet/accountmanagementservice/core/exception/AccountNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wallet/accountmanagementservice/core/exception/AccountNotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wallet/accountmanagementservice/core/exception/InsufficientBalanceException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wallet/accountmanagementservice/core/exception/InsufficientBalanceException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wallet/accountmanagementservice/core/service/impl/AccountServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wallet/accountmanagementservice/core/service/impl/AccountServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wallet/accountmanagementservice/core/service/impl/TransactionServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wallet/accountmanagementservice/core/service/impl/TransactionServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,20 +37,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/rafaelmatheuspereiradecastro/IdeaProjects/account-service-api&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "develop",
+    "last_opened_file_path": "/Users/rafaelmatheuspereiradecastro/IdeaProjects/account-service-api",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Docker.elk.logstash: Compose Deployment">
     <configuration name="AccountManagementServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.wallet.accountmanagementservice.AccountManagementServiceApplication" />
       <module name="account-management-service" />
@@ -75,9 +80,59 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
+      <deployment type="docker-compose.yml" />
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml.logstash: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="logstash" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="elk: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="sourceFilePath" value="elk/docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="elk.logstash: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="logstash" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="elk/docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Docker.elk.logstash: Compose Deployment" />
         <item itemvalue="Application.AccountManagementServiceApplication" />
+        <item itemvalue="Docker.elk: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yml.logstash: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
       </list>
     </recent_temporary>
   </component>
@@ -98,11 +153,76 @@
       <option name="project" value="LOCAL" />
       <updated>1716409104170</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="adicionando novas implementacoes">
+      <option name="closed" value="true" />
+      <created>1716410526715</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1716410526715</updated>
+    </task>
+    <task id="LOCAL-00003" summary="adicionando novas implementacoes">
+      <option name="closed" value="true" />
+      <created>1716410963548</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1716410963548</updated>
+    </task>
+    <task id="LOCAL-00004" summary="adicionando novas implementacoes">
+      <option name="closed" value="true" />
+      <created>1716412988598</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1716412988598</updated>
+    </task>
+    <task id="LOCAL-00005" summary="adicionando novas implementacoes">
+      <option name="closed" value="true" />
+      <created>1716413895860</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1716413895860</updated>
+    </task>
+    <task id="LOCAL-00006" summary="adicionando novas implementacoes">
+      <option name="closed" value="true" />
+      <created>1716415248052</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1716415248052</updated>
+    </task>
+    <task id="LOCAL-00007" summary="adicionando novas implementacoes">
+      <option name="closed" value="true" />
+      <created>1716461341619</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1716461341619</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="finaliznado implementaao do projeto" />
-    <option name="LAST_COMMIT_MESSAGE" value="finaliznado implementaao do projeto" />
+    <MESSAGE value="adicionando novas implementacoes" />
+    <option name="LAST_COMMIT_MESSAGE" value="adicionando novas implementacoes" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/account_service_api$AccountManagementServiceApplication.ic" NAME="AccountManagementServiceApplication Coverage Results" MODIFIED="1716414082689" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.wallet.accountmanagementservice.*</FILTER>
+    </SUITE>
   </component>
 </project>
