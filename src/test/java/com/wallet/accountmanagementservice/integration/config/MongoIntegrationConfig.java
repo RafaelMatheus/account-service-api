@@ -24,7 +24,6 @@ public class MongoIntegrationConfig {
 
         var starter = MongodStarter.getDefaultInstance();
         mongodExecutable = starter.prepare(mongodConfig);
-        mongodExecutable.start();
     }
 
     public static void stopMong() throws IOException {
