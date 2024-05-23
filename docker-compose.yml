@@ -1,95 +1,108 @@
-version: '2.1'
-services:
-  rabbitmq:
-    image: rabbitmq:3.6-management-alpine
-    ports:
-      - 15672:15672
-      - 5672:5672
-    container_name: rabbitmq
-    environment:
-      - RABBITMQ_HOST=rabbitmq
-      - RABBITMQ_USER=guest
-      - RABBITMQ_PASS=guest
-      - RABBITMQ_DEFAULT_VHOST=b2b
-    networks:
-      - wallet
+  version: '2.1'
 
-  mongodb:
-    image: mongo:3.6.1
-    container_name: mongodb
-    environment:
-      - MONGO_DATA_DIR=/data/db
-      - MONGO_LOG_DIR=/dev/null
-    volumes:
-      - MONGO_DATA:/data/db
-    ports:
-      - 27017:27017
-    command: mongod
-    networks:
-      - wallet
+  services:
+    rabbitmq:
+      image: rabbitmq:3.13-management
+      ports:
+        - 15672:15672
+        - 5672:5672
+      container_name: rabbitmq
+      environment:
+        - RABBITMQ_HOST=rabbitmq
+        - RABBITMQ_USER=guest
+        - RABBITMQ_PASS=guest
+        - RABBITMQ_DEFAULT_VHOST=b2b
+      networks:
+        - wallet
+      healthcheck:
+        test: ["CMD", "rabbitmqctl", "status"]
+        interval: 30s
+        timeout: 10s
+        retries: 5
 
-  account-management:
-    image: account-management
-    container_name: account-management
-    ports:
-      - 8080:8080
-    environment:
-      - SPRING_RABBITMQ_HOST=rabbitmq
-      - SPRING_DATA_MONGODB_URI=mongodb://mongodb
-    depends_on:
-      - mongodb
-      - rabbitmq
-    networks:
-      - wallet
+    dbmongo:
+      platform: linux/arm64/v8
+      image: mongo
+      container_name: dbmongo
+      environment:
+        - MONGO_DATA_DIR=/data/db
+        - MONGO_LOG_DIR=/dev/null
+      volumes:
+        - MONGO_DATA:/data/db
+      ports:
+        - 27017:27017
+      command: mongod --bind_ip_all
+      networks:
+        - wallet
+      healthcheck:
+        test: [ "CMD-SHELL", "mongo --eval 'db.stats()'" ]
+        interval: 30s
+        timeout: 30s
+        retries: 3
 
-  transaction-management:
-    image: transaction-management
-    container_name: transaction-management
-    ports:
-      - 8081:8081
-    environment:
-      - SPRING_RABBITMQ_HOST=rabbitmq
-      - SPRING_DATA_MONGODB_URI=mongodb://mongodb
-    depends_on:
-      - mongodb
-      - rabbitmq
-      - account-management
-    networks:
-      - wallet
+    account-management:
+      image: account-management
+      container_name: account-management
+      ports:
+        - 8080:8080
+      environment:
+        - SPRING_RABBITMQ_HOST=rabbitmq
+        - SPRING_DATA_MONGODB_URI=mongodb://dbmongo:27017
+      depends_on:
+        - dbmongo
+        - rabbitmq
+      networks:
+        - wallet
 
-  payment-management:
-    image: payment-management
-    container_name: payment-management
-    ports:
-      - 8082:8082
-    environment:
-      - SPRING_RABBITMQ_HOST=rabbitmq
-      - SPRING_DATA_MONGODB_URI=mongodb://mongodb
-    depends_on:
-      - mongodb
-      - rabbitmq
-      - account-management
-      - transaction-management
-    networks:
-      - wallet
+    transaction-management:
+      image: transaction-management
+      container_name: transaction-management
+      ports:
+        - 8081:8081
+      environment:
+        - SPRING_RABBITMQ_HOST=rabbitmq
+        - SPRING_DATA_MONGODB_URI=mongodb://dbmongo:27017
+      depends_on:
+        - dbmongo
+        - rabbitmq
+        - account-management
+      networks:
+        - wallet
 
-  nginx:
-    image: nginx:latest
-    ports:
-      - 80:80
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
-    depends_on:
-      - account-management
-      - payment-management
-      - transaction-management
-    networks:
-      - wallet
+    payment-management:
+      image: payment-management
+      container_name: payment-management
+      ports:
+        - 8082:8082
+      environment:
+        - SPRING_RABBITMQ_HOST=rabbitmq
+        - SPRING_DATA_MONGODB_URI=mongodb://dbmongo:27017
+      depends_on:
+        - dbmongo
+        - rabbitmq
+        - account-management
+        - transaction-management
+      networks:
+        - wallet
 
-volumes:
-  MONGO_DATA:
-  SQL_DATA:
+    nginx:
+      platform: linux/arm64/v8
+      image: nginx:latest
+      ports:
+        - 80:80
+      volumes:
+        - ./nginx.conf:/etc/nginx/nginx.conf
+      depends_on:
+        - account-management
+        - payment-management
+        - transaction-management
+      networks:
+        - wallet
 
-networks:
-  wallet:
-    driver: bridge
+  volumes:
+    MONGO_DATA:
+    SQL_DATA:
+
+  networks:
+    wallet:
+      driver: bridge
