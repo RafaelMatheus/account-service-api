@@ -1,0 +1,59 @@
+  version: '2.1'
+
+  services:
+    account-management:
+      image: account-management
+      container_name: account-management
+      ports:
+        - 8080:8080
+      environment:
+        - SPRING_PROFILES_ACTIVE=prod
+      networks:
+        - wallet
+
+    transaction-management:
+      image: transaction-management
+      container_name: transaction-management
+      ports:
+        - 8081:8081
+      environment:
+        - SPRING_PROFILES_ACTIVE=prod
+      depends_on:
+        - account-management
+      networks:
+        - wallet
+
+    payment-management:
+      image: payment-management
+      container_name: payment-management
+      ports:
+        - 8082:8082
+      environment:
+        - SPRING_PROFILES_ACTIVE=prod
+      depends_on:
+        - account-management
+        - transaction-management
+      networks:
+        - wallet
+
+    nginx:
+      platform: linux/arm64/v8
+      image: nginx:latest
+      ports:
+        - 80:80
+      volumes:
+        - ./nginx.conf:/etc/nginx/nginx.conf
+      depends_on:
+        - account-management
+        - payment-management
+        - transaction-management
+      networks:
+        - wallet
+
+  volumes:
+    MONGO_DATA:
+    SQL_DATA:
+
+  networks:
+    wallet:
+      driver: bridge

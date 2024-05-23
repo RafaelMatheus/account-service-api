@@ -43,7 +43,7 @@ docker build -t account-management .
 Observação: Certifique-se de ter construido as imagens das dependências antes de executar o docker-compose, [Transaction Service](https://github.com/RafaelMatheus/transaction-service-api) e [Payment Service](https://github.com/RafaelMatheus/payment-service-api).
 
 ```bash
-docker-compose up -d
+docker-compose -f docker-compose-services up -d
 ```
 Observação: Certifique-se que está executando o comando docker-compose no diretório principal do account-management-service. Isso garantirá que o Docker Compose encontre e utilize o arquivo correto para iniciar todos os serviços necessários.
 
