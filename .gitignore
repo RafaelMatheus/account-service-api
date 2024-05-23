@@ -23,6 +23,7 @@ bin/
 *.jar
 *.war
 *.ear
+*.xml
 
 # Project specific (Eclipse)
 .classpath
@@ -31,3 +32,4 @@ bin/
 
 # Ignore spring-boot-devtools restart log file
 restart.log
+*.idea/*
