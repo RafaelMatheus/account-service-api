@@ -27,6 +27,6 @@ public class MongoIntegrationConfig {
     }
 
     public static void stopMong() throws IOException {
-        mongodExecutable.start();
+        mongodExecutable.stop();
     }
 }
